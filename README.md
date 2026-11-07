@@ -34,7 +34,8 @@ python task1_user_activity.py
 ### 1. Создание DataFrame и проверка структуры
 Создан `df_user_activity` по заданным данным с явной схемой `StructType`. Схема выведена методом `printSchema()`.
 
-![Результат задания 1.2](screenshots/image_2026-11-07_22-18-02.png)
+<img width="572" height="242" alt="image_2026-11-07_22-18-02" src="https://github.com/user-attachments/assets/a8f6dd50-7572-43b8-b918-54a6b0122a99" />
+
 
 ### 2. Расчёт построчных показателей
 **2.1.** Колонка `total_sessions_count` равна сумме значений словаря `sessions_by_device` по всем устройствам (`map_values` + `aggregate`).
@@ -43,7 +44,8 @@ python task1_user_activity.py
 F.aggregate(F.map_values("sessions_by_device"), F.lit(0), lambda a, x: a + x)
 ```
 
-![Результат задания 2.1](screenshots/image_2026-11-07_22-25-57.png)
+<img width="1052" height="463" alt="image_2026-11-07_22-25-57" src="https://github.com/user-attachments/assets/e885d13f-73b3-41e3-a747-7b9856827450" />
+
 
 **2.2.** Колонка `mobile_sessions` содержит число сессий с устройства `mobile`. Если ключа нет, подставляется 0 (`getItem` + `coalesce`).
 
@@ -51,21 +53,25 @@ F.aggregate(F.map_values("sessions_by_device"), F.lit(0), lambda a, x: a + x)
 F.coalesce(F.col("sessions_by_device").getItem("mobile"), F.lit(0))
 ```
 
-![Результат задания 2.2](screenshots/image_2026-11-07_22-26-16.png)
+<img width="1238" height="463" alt="image_2026-11-07_22-26-16" src="https://github.com/user-attachments/assets/a0afcdc2-ae7c-4b7d-9720-5089842e9526" />
+
 
 ### 3. Агрегация по пользователям
 **3.1.** `total_sessions_all_time` — общее число сессий пользователя за весь период, сортировка по убыванию (`groupBy` + `sum` + `orderBy`).
 
-![Результат задания 3.1](screenshots/image_2026-11-07_22-26-25.png)
+<img width="643" height="290" alt="image_2026-11-07_22-26-25" src="https://github.com/user-attachments/assets/72c31c5d-aae0-4fa6-a0ed-f98892cc98d9" />
+
 
 **3.2.** `unique_visited_pages_all_time` — список уникальных страниц пользователя: массив разворачивается через `explode_outer`, затем значения собираются через `collect_set`.
 
-![Результат задания 3.2](screenshots/image_2026-11-07_22-26-48.png)
+<img width="657" height="282" alt="image_2026-11-07_22-26-48" src="https://github.com/user-attachments/assets/f8cc4524-643c-4478-af85-536af2fd066d" />
+
 
 ### 4. Фильтрация
 **4.1.** Отобраны записи с `usability_rating > 3.5`, результат отсортирован по рейтингу по убыванию. Записи с `NULL` в рейтинге исключаются автоматически.
 
-![Результат задания 4.1](screenshots/image_2026-11-07_22-27-06.png)
+<img width="1056" height="362" alt="image_2026-11-07_22-27-06" src="https://github.com/user-attachments/assets/4c696ba0-f4fb-4769-aa8c-ffeed7559115" />
+
 
 ## Вывод
 
